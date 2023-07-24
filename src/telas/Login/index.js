@@ -1,19 +1,41 @@
-import { useState } from "react";
-import { Text, View, TextInput, TouchableOpacity, StatusBar } from 'react-native';
-import { estilo } from './estilos';
+import { useContext, useState } from 'react'
+import {
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  StatusBar,
+  Alert,
+} from 'react-native'
+import { styles } from './estilos';
+import { ThemeContext } from '../../contexts/ThemeContext';
+import { AuthContext } from '../../contexts/AuthenticationContext'
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+  const [password, setPassword] = useState("");
+  const {selectedTheme} = useContext(ThemeContext);
+  const {login} = useContext(AuthContext);
+  const componentStyle = styles(selectedTheme);
+
+
+  function authUser() {
+    const response = login(email, password);
+    if (response) {
+      navigation.navigate('Principal');
+    } else {
+      Alert.alert('Invalid credentials');
+    }
+  }
 
   return (
-    <View style={estilo.container}>
+    <View style={componentStyle.container}>
       <StatusBar />
-      <Text style={estilo.titulo}>Login</Text>
+      <Text style={componentStyle.titulo}>Login</Text>
 
-      <View style={estilo.inputArea}>
+      <View style={componentStyle.inputArea}>
         <TextInput
-          style={estilo.input}
+          style={componentStyle.input}
           placeholder="Email"
           placeholderTextColor="#999"
           autoCapitalize="none"
@@ -21,20 +43,21 @@ export default function Login({ navigation }) {
           onChangeText={setEmail}
         />
         <TextInput
-          style={estilo.input}
+          style={componentStyle.input}
           placeholder="Senha"
           placeholderTextColor="#999"
           autoCapitalize="none"
-          value={senha}
-          onChangeText={setSenha}
+          secureTextEntry={true}
+          value={password}
+          onChangeText={setPassword}
         />
       </View>
 
       <TouchableOpacity
-        style={estilo.botao}
-        onPress={() => navigation.navigate('Principal')}
+        style={componentStyle.botao}
+        onPress={() => authUser()}
       >
-        <Text style={estilo.botaoTexto}>Entrar</Text>
+        <Text style={componentStyle.botaoTexto}>Entrar</Text>
       </TouchableOpacity>
     </View>
   );

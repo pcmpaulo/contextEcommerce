@@ -1,23 +1,25 @@
 import { StyleSheet } from 'react-native';
-import { tema } from '../../estilosGlobais';
+import { defaultTheme } from '../../estilosGlobais';
 
-export const estilo = StyleSheet.create({
+
+export const styles = (theme = defaultTheme) => {
+  return StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: tema.fundo,
+      backgroundColor: theme.fundo,
       alignItems: 'center',
       justifyContent: 'center',
     },
     titulo: {
       fontSize: 25,
       fontWeight: 'bold',
-      color: tema.texto,
+      color: theme.texto,
       marginBottom: 20,
     },
     subtitulo: {
       fontSize: 18,
       fontWeight: '400',
-      color: tema.texto,
+      color: theme.texto,
       marginBottom: 20,
     },
     inputArea: {
@@ -27,3 +29,4 @@ export const estilo = StyleSheet.create({
       justifyContent: 'center',
     },
   });
+}

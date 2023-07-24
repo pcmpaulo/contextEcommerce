@@ -1,18 +1,17 @@
 import { Text, View, FlatList, StatusBar, TouchableOpacity } from 'react-native';
 import { Produto } from '../../componentes/Produto';
-import { produtos } from './produtos';
 import MaterialCommunityIcons from 'react-native-vector-icons/Feather';
 import { useContext } from 'react'
 import { ThemeContext } from '../../contexts/ThemeContext'
-import { styles } from '../Principal/estilos';
+import { styles } from './estilos';
 import { AuthContext } from '../../contexts/AuthenticationContext'
 import { ProductContext } from '../../contexts/ProductsContext'
 
 
-export default function Principal({navigation}) {
+export default function PurchaseSummary({navigation}) {
   const {selectedTheme} = useContext(ThemeContext);
   const {user} = useContext(AuthContext);
-  const {productQuantity, lastSeeProducts} = useContext(ProductContext);
+  const {productQuantity, products, lastSeeProducts} = useContext(ProductContext);
 
   const componentStyle = styles(selectedTheme);
 
@@ -22,7 +21,7 @@ export default function Principal({navigation}) {
       <View style={componentStyle.tituloArea}>
         <Text style={componentStyle.titulo}>Olá, {user.name}</Text>
         <View style={componentStyle.carrinhoArea}>
-          <TouchableOpacity onPress={() => navigation.navigate('Summary')}>
+          <TouchableOpacity onPress={() => {}}>
             <MaterialCommunityIcons name="shopping-cart" size={30} color="#fff" style={componentStyle.carrinhoIcon} />
           </TouchableOpacity>
           { productQuantity > 0 &&
@@ -37,29 +36,18 @@ export default function Principal({navigation}) {
       </View>
 
       <FlatList
-        data={produtos}
+        data={products}
         keyExtractor={item => Math.random()}
-        renderItem={({ item }) => <Produto item={item} adicionar={true} />}
+        renderItem={({ item }) => <Produto item={item} adicionar={false} />}
         style={componentStyle.lista}
         showsVerticalScrollIndicator={false}
-        ListHeaderComponent={() =>
-          <View>
-            {lastSeeProducts.length > 0 &&
-              <View style={componentStyle.ultimosVistos}>
-                <Text style={componentStyle.tituloUltimosVistos}>Últimos vistos</Text>
-                <FlatList
-                  data={lastSeeProducts}
-                  keyExtractor={item => Math.random()}
-                  renderItem={({ item }) => <Produto item={item} adicionar={false} />}
-                  style={componentStyle.lista}
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                />
-              </View>}
-            <Text style={[componentStyle.titulo, { paddingLeft: 16 }]}>Produtos</Text>
-          </View>
-        }
       />
+      <TouchableOpacity
+        style={componentStyle.botao}
+        onPress={() => navigation.navigate('Finish')}
+      >
+        <Text style={componentStyle.botaoTexto}>Buy</Text>
+      </TouchableOpacity>
     </View>
   );
 }

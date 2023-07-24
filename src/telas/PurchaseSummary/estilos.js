@@ -6,7 +6,7 @@ export const styles = (theme = defaultTheme) => {
     container: {
       flex: 1,
       backgroundColor: theme.fundo,
-      alignItems: 'center',
+      alignItems: 'stretch',
       justifyContent: 'center',
       paddingTop: 12,
     },
@@ -68,6 +68,19 @@ export const styles = (theme = defaultTheme) => {
       color: theme.texto,
       fontSize: 30,
     },
+    botao: {
+      margin: 16,
+      marginBottom: 32,
+      paddingVertical: 16,
+      borderRadius: 10,
+      backgroundColor: theme.botao,
+    },
+    botaoTexto: {
+      fontSize: 18,
+      fontWeight: '600',
+      textAlign: 'center',
+      color: theme.preto,
+    }
   });
 }
 

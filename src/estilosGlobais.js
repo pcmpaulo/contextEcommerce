@@ -1,4 +1,4 @@
-const tema = {
+const darkTheme = {
   fundo: '#051933',
   titulo: '#FFFFFF',
   texto: '#FFFFFF',
@@ -10,4 +10,18 @@ const tema = {
   input: '#FFFFFF',
 }
 
-export { tema };
+const lightTheme = {
+  fundo: '#FFFFFF',
+  titulo: '#051933',
+  texto: '#000000',
+  branco: '#000000',
+  preto: '#FFFFFF',
+  cinza: '#ebebeb',
+  ultimosVistos: '#ccefff',
+  botao: '#2a663c',
+  input: '#0b2a52',
+}
+
+const defaultTheme = lightTheme
+
+export { defaultTheme, darkTheme, lightTheme };
