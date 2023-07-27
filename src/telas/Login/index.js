@@ -52,13 +52,6 @@ export default function Login({ navigation }) {
           onChangeText={setPassword}
         />
       </View>
-
-      <TouchableOpacity
-        style={componentStyle.botao}
-        onPress={() => authUser()}
-      >
-        <Text style={componentStyle.botaoTexto}>Entrar</Text>
-      </TouchableOpacity>
     </View>
   );
 }

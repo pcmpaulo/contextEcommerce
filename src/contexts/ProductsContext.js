@@ -12,9 +12,9 @@ export function ProductProvider({children}) {
   const [products, setProducts] = useState([]);
   const [lastSeeProducts, setLastSeeProducts] = useState([]);
 
-  useEffect(() => {
-    loadProducts();
-  }, [])
+  // useEffect(() => {
+  //   loadProducts();
+  // }, [])
 
   async function loadProducts() {
     const responseProducts = await listProducts();

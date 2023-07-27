@@ -6,16 +6,16 @@ export function AuthProvider({children}) {
   const [user, setUser] = useState({});
 
   function login(email, password) {
-    if (email === '1' && password === '123') {
+    const auth = checkCredentials()
+    if (auth) {
       setUser({
         name: 'Paulo',
         email: 'paulo@gmail.com',
         address: 'Pantano do Sul',
         phoneNumber: '48999303089'
       })
-      return true
     }
-    return false
+    return auth
   }
 
   return (
@@ -26,4 +26,8 @@ export function AuthProvider({children}) {
       {children}
     </AuthContext.Provider>
   )
+}
+
+export function checkCredentials(email, password) {
+  return (email === '1' && password === '123')
 }
